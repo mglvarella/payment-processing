@@ -20,7 +20,7 @@ public class PaymentService {
 
         Payment payment = PaymentFabric.from(request);
 
-        paymentRepository.save(payment);
+        //paymentRepository.save(payment);
 
         return new PaymentResponseDTO(payment.getId(), payment.getStatus(), payment.getAmount(), payment.getCreatedAt());
 

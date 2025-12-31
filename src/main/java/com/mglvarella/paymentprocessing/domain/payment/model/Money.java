@@ -2,11 +2,13 @@ package com.mglvarella.paymentprocessing.domain.payment.model;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
+import lombok.Getter;
 
 import java.math.BigDecimal;
 import java.util.Currency;
 
 @Embeddable
+@Getter
 public class Money {
 
     @Column(name = "amount", nullable = false)
