@@ -13,15 +13,15 @@ public class Money {
     private BigDecimal value;
 
     @Column(name = "currency", length = 3, nullable = false)
-    private String currency;
+    private Currency currency;
 
     protected Money() {}
 
-    public Money(BigDecimal value, Currency currency) {
+    public Money(BigDecimal value, String currencyCode) {
         if (value.compareTo(BigDecimal.ZERO) <= 0) {
             throw new IllegalArgumentException("Amount must be positive");
         }
         this.value = value;
-        this.currency = currency.getCurrencyCode();
+        this.currency = Currency.getInstance(currencyCode);
     }
 }
