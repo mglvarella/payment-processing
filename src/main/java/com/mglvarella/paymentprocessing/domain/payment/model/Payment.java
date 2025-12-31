@@ -6,7 +6,6 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 
 import java.time.Instant;
-import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Entity
@@ -17,7 +16,7 @@ public class Payment {
     private Money amount;
     private PaymentMethod method;
     private PaymentStatus status;
-    private Instant time;
+    private Instant createdAt;
 
     public void markAsApproved() {
         this.status = PaymentStatus.APPROVED;
