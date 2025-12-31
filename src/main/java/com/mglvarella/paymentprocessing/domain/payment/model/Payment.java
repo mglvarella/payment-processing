@@ -1,9 +1,11 @@
-package com.mglvarella.paymentprocessing.domain.payment;
+package com.mglvarella.paymentprocessing.domain.payment.model;
 
 
+import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 
+import java.time.Instant;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
@@ -11,10 +13,11 @@ import java.util.UUID;
 public class Payment {
     @Id
     private UUID id;
-    private Double amount;
+    @Embedded
+    private Money amount;
     private PaymentMethod method;
     private PaymentStatus status;
-    private LocalDateTime time;
+    private Instant time;
 
     public void markAsApproved() {
         this.status = PaymentStatus.APPROVED;
