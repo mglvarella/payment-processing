@@ -4,8 +4,7 @@ import com.mglvarella.paymentprocessing.dto.PaymentRequestDTO;
 import com.mglvarella.paymentprocessing.dto.PaymentResponseDTO;
 import com.mglvarella.paymentprocessing.service.PaymentService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/payments")
@@ -17,10 +16,13 @@ public class PaymentController {
         this.paymentService = paymentService;
     }
 
-    public ResponseEntity<PaymentResponseDTO> create(String idempotencyKey, PaymentRequestDTO requestDTO){
+    @PostMapping
+    public ResponseEntity<PaymentResponseDTO> create(@RequestHeader String idempotencyKey, @RequestBody PaymentRequestDTO requestDTO){
 
         PaymentResponseDTO response = paymentService.createPayment(requestDTO, idempotencyKey);
 
         return ResponseEntity.ok(response);
     }
+
+
 }

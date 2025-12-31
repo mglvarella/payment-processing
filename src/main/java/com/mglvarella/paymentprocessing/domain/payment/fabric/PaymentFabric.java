@@ -12,11 +12,11 @@ import java.util.UUID;
 public class PaymentFabric {
 
     public static Payment from(PaymentRequestDTO request) {
-        if (request.amount().getValue().compareTo(BigDecimal.ZERO) <= 0) {
+        if (request.amount().compareTo(BigDecimal.ZERO) <= 0) {
             throw new IllegalArgumentException("Amount must be positive");
         }
 
-        Money money = request.amount();
+        Money money = new Money(request.amount(), request.currency());
 
         Payment payment = new Payment(
                 UUID.randomUUID(),

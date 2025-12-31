@@ -1,10 +1,12 @@
 package com.mglvarella.paymentprocessing.dto;
 
-import com.mglvarella.paymentprocessing.domain.payment.model.Money;
 import com.mglvarella.paymentprocessing.domain.payment.model.PaymentMethod;
 
+import java.math.BigDecimal;
+
 public record PaymentRequestDTO(
-        Money amount,
+        BigDecimal amount,
+        String currency,
         PaymentMethod method
 ) {}
 
