@@ -1,9 +1,9 @@
-package com.mglvarella.paymentprocessing.controller;
+package com.mglvarella.paymentprocessing.api.controller;
 
-import com.mglvarella.paymentprocessing.dto.PaymentRequestDTO;
-import com.mglvarella.paymentprocessing.dto.PaymentResponseDTO;
-import com.mglvarella.paymentprocessing.dto.PaymentStatusResponseDTO;
-import com.mglvarella.paymentprocessing.service.PaymentService;
+import com.mglvarella.paymentprocessing.api.dto.PaymentRequestDTO;
+import com.mglvarella.paymentprocessing.api.dto.PaymentResponseDTO;
+import com.mglvarella.paymentprocessing.api.dto.PaymentStatusResponseDTO;
+import com.mglvarella.paymentprocessing.application.service.PaymentService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 

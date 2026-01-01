@@ -1,7 +1,7 @@
 package com.mglvarella.paymentprocessing.domain.payment.model;
 
-import com.mglvarella.paymentprocessing.dto.PaymentResponseDTO;
-import com.mglvarella.paymentprocessing.dto.PaymentStatusResponseDTO;
+import com.mglvarella.paymentprocessing.api.dto.PaymentResponseDTO;
+import com.mglvarella.paymentprocessing.api.dto.PaymentStatusResponseDTO;
 
 public class PaymentMapper {
     public static PaymentResponseDTO toResponseDTO(Payment payment){

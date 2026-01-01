@@ -1,4 +1,4 @@
-package com.mglvarella.paymentprocessing.dto;
+package com.mglvarella.paymentprocessing.api.dto;
 
 import com.mglvarella.paymentprocessing.domain.payment.model.PaymentStatus;
 

@@ -1,12 +1,12 @@
-package com.mglvarella.paymentprocessing.service;
+package com.mglvarella.paymentprocessing.application.service;
 
-import com.mglvarella.paymentprocessing.domain.payment.fabric.PaymentFabric;
+import com.mglvarella.paymentprocessing.domain.payment.factory.PaymentFactory;
 import com.mglvarella.paymentprocessing.domain.payment.model.Payment;
 import com.mglvarella.paymentprocessing.domain.payment.model.PaymentMapper;
-import com.mglvarella.paymentprocessing.dto.PaymentRequestDTO;
-import com.mglvarella.paymentprocessing.dto.PaymentResponseDTO;
-import com.mglvarella.paymentprocessing.dto.PaymentStatusResponseDTO;
-import com.mglvarella.paymentprocessing.repository.PaymentRepository;
+import com.mglvarella.paymentprocessing.api.dto.PaymentRequestDTO;
+import com.mglvarella.paymentprocessing.api.dto.PaymentResponseDTO;
+import com.mglvarella.paymentprocessing.api.dto.PaymentStatusResponseDTO;
+import com.mglvarella.paymentprocessing.domain.payment.repository.PaymentRepository;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.stereotype.Service;
 
@@ -25,7 +25,7 @@ public class PaymentService {
 
     public PaymentResponseDTO createPayment(PaymentRequestDTO paymentRequest, String idempotencyKey){
 
-        Payment payment = PaymentFabric.from(paymentRequest);
+        Payment payment = PaymentFactory.from(paymentRequest);
 
         paymentRepository.save(payment);
 

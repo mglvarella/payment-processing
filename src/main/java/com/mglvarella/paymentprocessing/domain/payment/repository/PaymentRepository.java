@@ -1,4 +1,4 @@
-package com.mglvarella.paymentprocessing.repository;
+package com.mglvarella.paymentprocessing.domain.payment.repository;
 
 import com.mglvarella.paymentprocessing.domain.payment.model.Payment;
 import org.springframework.data.jpa.repository.JpaRepository;
