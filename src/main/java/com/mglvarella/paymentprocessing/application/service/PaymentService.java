@@ -1,5 +1,6 @@
 package com.mglvarella.paymentprocessing.application.service;
 
+import com.mglvarella.paymentprocessing.application.ports.IdempotencyStorage;
 import com.mglvarella.paymentprocessing.domain.payment.factory.PaymentFactory;
 import com.mglvarella.paymentprocessing.domain.payment.model.Payment;
 import com.mglvarella.paymentprocessing.domain.payment.model.PaymentMapper;
@@ -10,6 +11,7 @@ import com.mglvarella.paymentprocessing.domain.payment.repository.PaymentReposit
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.stereotype.Service;
 
+import java.time.Duration;
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -18,18 +20,33 @@ import java.util.stream.Collectors;
 public class PaymentService {
 
     private final PaymentRepository paymentRepository;
+    private final IdempotencyStorage idempotencyStorage;
 
-    public PaymentService(PaymentRepository paymentRepository) {
+    public PaymentService(PaymentRepository paymentRepository, IdempotencyStorage idempotencyStorage) {
         this.paymentRepository = paymentRepository;
+        this.idempotencyStorage = idempotencyStorage;
     }
 
     public PaymentResponseDTO createPayment(PaymentRequestDTO paymentRequest, String idempotencyKey){
+
+        Duration expiration = Duration.ofMinutes(60);
+
+        var cached = idempotencyStorage.getResponse(idempotencyKey);
+        if (cached.isPresent()) return cached.get();
+
+        if (!idempotencyStorage.tryLock(idempotencyKey, expiration)) {
+            throw new IllegalStateException("Processamento em curso ou duplicado.");
+        }
 
         Payment payment = PaymentFactory.from(paymentRequest);
 
         paymentRepository.save(payment);
 
-        return PaymentMapper.toResponseDTO(payment);
+        PaymentResponseDTO response = PaymentMapper.toResponseDTO(payment);
+
+        idempotencyStorage.saveResponse(idempotencyKey, response, expiration);
+
+        return response;
     }
 
     public PaymentResponseDTO getPaymentById(UUID paymentId){
