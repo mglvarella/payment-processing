@@ -5,6 +5,7 @@ import com.mglvarella.paymentprocessing.domain.payment.model.Payment;
 import com.mglvarella.paymentprocessing.domain.payment.model.PaymentMapper;
 import com.mglvarella.paymentprocessing.dto.PaymentRequestDTO;
 import com.mglvarella.paymentprocessing.dto.PaymentResponseDTO;
+import com.mglvarella.paymentprocessing.dto.PaymentStatusResponseDTO;
 import com.mglvarella.paymentprocessing.repository.PaymentRepository;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.stereotype.Service;
@@ -44,5 +45,12 @@ public class PaymentService {
         return payments.stream()
                 .map(PaymentMapper::toResponseDTO)
                 .collect(Collectors.toList());
+    }
+
+    public PaymentStatusResponseDTO getPaymentStatus(UUID paymentId) {
+        Payment payment = paymentRepository.findById(paymentId)
+                .orElseThrow(() -> new EntityNotFoundException("Payment not found: " + paymentId));
+
+        return PaymentMapper.toStatusResponseDTO(payment);
     }
 }

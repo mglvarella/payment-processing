@@ -2,6 +2,7 @@ package com.mglvarella.paymentprocessing.controller;
 
 import com.mglvarella.paymentprocessing.dto.PaymentRequestDTO;
 import com.mglvarella.paymentprocessing.dto.PaymentResponseDTO;
+import com.mglvarella.paymentprocessing.dto.PaymentStatusResponseDTO;
 import com.mglvarella.paymentprocessing.service.PaymentService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -39,6 +40,14 @@ public class PaymentController {
     public ResponseEntity<List<PaymentResponseDTO>> findById(){
 
         List<PaymentResponseDTO> response = paymentService.getAllPayments();
+
+        return ResponseEntity.ok(response);
+    }
+
+    @GetMapping("/{id}/status")
+    public ResponseEntity<PaymentStatusResponseDTO> getSatatus(@PathVariable("id") UUID paymentId){
+
+        PaymentStatusResponseDTO response = paymentService.getPaymentStatus(paymentId);
 
         return ResponseEntity.ok(response);
     }
