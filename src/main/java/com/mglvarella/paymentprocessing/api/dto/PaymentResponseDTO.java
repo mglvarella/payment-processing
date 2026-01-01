@@ -1,6 +1,5 @@
 package com.mglvarella.paymentprocessing.api.dto;
 
-import com.mglvarella.paymentprocessing.domain.payment.model.Money;
 import com.mglvarella.paymentprocessing.domain.payment.model.PaymentStatus;
 
 import java.time.Instant;
@@ -9,7 +8,7 @@ import java.util.UUID;
 public record PaymentResponseDTO(
         UUID id,
         PaymentStatus status,
-        MoneyDTO money,
+        MoneyResponseDTO money,
         Instant createdAt
 ) {}
 
