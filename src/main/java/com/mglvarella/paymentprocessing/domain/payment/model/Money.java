@@ -12,7 +12,7 @@ import java.util.Currency;
 public class Money {
 
     @Column(name = "amount", nullable = false)
-    private BigDecimal value;
+    private BigDecimal amount;
 
     @Column(name = "currency", length = 3, nullable = false)
     private Currency currency;
@@ -23,7 +23,7 @@ public class Money {
         if (value.compareTo(BigDecimal.ZERO) <= 0) {
             throw new IllegalArgumentException("Amount must be positive");
         }
-        this.value = value;
+        this.amount = value;
         this.currency = Currency.getInstance(currencyCode);
     }
 }
