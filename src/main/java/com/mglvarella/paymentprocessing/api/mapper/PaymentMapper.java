@@ -1,8 +1,9 @@
-package com.mglvarella.paymentprocessing.domain.payment.model;
+package com.mglvarella.paymentprocessing.api.mapper;
 
 import com.mglvarella.paymentprocessing.api.dto.MoneyResponseDTO;
 import com.mglvarella.paymentprocessing.api.dto.PaymentResponseDTO;
 import com.mglvarella.paymentprocessing.api.dto.PaymentStatusResponseDTO;
+import com.mglvarella.paymentprocessing.domain.payment.model.Payment;
 
 public class PaymentMapper {
     public static PaymentResponseDTO toResponseDTO(Payment payment) {

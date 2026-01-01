@@ -3,7 +3,7 @@ package com.mglvarella.paymentprocessing.application.service;
 import com.mglvarella.paymentprocessing.application.ports.IdempotencyStorage;
 import com.mglvarella.paymentprocessing.domain.payment.factory.PaymentFactory;
 import com.mglvarella.paymentprocessing.domain.payment.model.Payment;
-import com.mglvarella.paymentprocessing.domain.payment.model.PaymentMapper;
+import com.mglvarella.paymentprocessing.api.mapper.PaymentMapper;
 import com.mglvarella.paymentprocessing.api.dto.PaymentRequestDTO;
 import com.mglvarella.paymentprocessing.api.dto.PaymentResponseDTO;
 import com.mglvarella.paymentprocessing.api.dto.PaymentStatusResponseDTO;
@@ -32,7 +32,9 @@ public class PaymentService {
         Duration expiration = Duration.ofMinutes(60);
 
         var cached = idempotencyStorage.getResponse(idempotencyKey);
-        if (cached.isPresent()) return cached.get();
+        if (cached.isPresent()) {
+            return cached.get();
+        }
 
         if (!idempotencyStorage.tryLock(idempotencyKey, expiration)) {
             throw new IllegalStateException("Processamento em curso ou duplicado.");
