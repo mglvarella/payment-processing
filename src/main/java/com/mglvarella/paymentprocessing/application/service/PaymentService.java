@@ -29,7 +29,7 @@ public class PaymentService {
 
         paymentRepository.save(payment);
 
-        return new PaymentResponseDTO(payment.getId(), payment.getStatus(), payment.getAmount(), payment.getCreatedAt());
+        return PaymentMapper.toResponseDTO(payment);
     }
 
     public PaymentResponseDTO getPaymentById(UUID paymentId){

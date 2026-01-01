@@ -21,7 +21,7 @@ public class Payment {
     @Id
     private UUID id;
     @Embedded
-    private Money amount;
+    private Money money;
     private PaymentMethod method;
     private PaymentStatus status;
     private Instant createdAt;

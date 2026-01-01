@@ -19,11 +19,11 @@ public class Money {
 
     protected Money() {}
 
-    public Money(BigDecimal value, String currencyCode) {
-        if (value.compareTo(BigDecimal.ZERO) <= 0) {
+    public Money(BigDecimal amount, String currencyCode) {
+        if (amount.compareTo(BigDecimal.ZERO) <= 0) {
             throw new IllegalArgumentException("Amount must be positive");
         }
-        this.amount = value;
+        this.amount = amount;
         this.currency = Currency.getInstance(currencyCode);
     }
 }

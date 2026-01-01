@@ -9,7 +9,7 @@ import java.util.UUID;
 public record PaymentResponseDTO(
         UUID id,
         PaymentStatus status,
-        Money amount,
+        MoneyDTO money,
         Instant createdAt
 ) {}
 
